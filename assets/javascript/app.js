@@ -33,7 +33,7 @@ function arrayButtons() {
         comedianButton.addClass("comedianButton");
         $("#comedian-buttons").append(comedianButton);      
     };
-    // This function will 
+    // This click function will display the gifs from the GIPHY API when the comedianButton is clicked.
     $(".comedianButton").on("click", function() {
         $(".gifs").empty();
         searchGiphy($(this).text());
@@ -48,32 +48,33 @@ function buttonAddComedian(person) {
     }
 }
 
-function searchGiphy(person) {    
+function searchGiphy(person) {
+    let url = "http://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=YfTTp6H2HDR02OTPxGMDAvq0j4waEWYa&rating=" + limitRating + "&limit=" + gifCount;
     $.ajax({
-        url: "http://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=YfTTp6H2HDR02OTPxGMDAvq0j4waEWYa&rating=" + 
-        limitRating + "&limit=" + gifCount,
+        url: url,
         method: "GET",
     }).then(function(response) {
-        response.data.forEach(function(element) {
+        let results = response.data;
+        results.forEach(function(element) {
             let addDiv = $("<div>");
             addDiv.append("<p>Rating: " + element.rating.toUpperCase() + "</p>");
             addDiv.addClass("gif-box");
             let newGiphy = $("<img src = '" + element.images.fixed_height_still.url + "'>");
-            newGiphy.attr("state", "still");
+            newGiphy.attr("data-state", "still");
             newGiphy.attr("still-data", element.images.fixed_height_still.url);
-            newGiphy.attr("animated-data", element.images.fixed_height.url);
+            newGiphy.attr("data-animated", element.images.fixed_height.url);
             newGiphy.addClass("giphy");
             addDiv.append(newGiphy);
             $(".gifs").append(addDiv);
         })
         
-        $(".giphy").unbind("click");
         $(".giphy").on("click", function() {
-            if ($(this).attr("state") === "still") {
-                $(this).attr("state", "animated");
-                $(this).attr("src", $(this).attr("animated-data"));
+            let state = $(this).attr("data-state");
+            if (state === "still") {
+                $(this).attr("data-state", "animated");
+                $(this).attr("src", $(this).attr("data-animated"));
             } else {
-                $(this).attr("state", "still");
+                $(this).attr("data-state", "still");
                 $(this).attr("src", $(this).attr("still-data"));
             }
         });
