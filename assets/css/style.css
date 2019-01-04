@@ -1,7 +1,15 @@
 body {
     background-image: url(../images/background.jpg);
-    background-size: 100%;
+    background-size: cover;
+    min-height: 100%;
+    background-attachment: fixed;
+    background-position: center;
     color: white;
+}
+
+.container {
+    display: block;
+    
 }
 
 h1 {
@@ -36,6 +44,22 @@ label {
 }
 
 .form-group {
-    padding: 20px 0 0 0;
+    padding: 0 0 15px 0;
+}
+
+.gifs{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gif-box {
+    float: left;
+    margin: 10px 10px 10px 20px;
+}
+
+p {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
