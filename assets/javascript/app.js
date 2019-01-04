@@ -19,11 +19,11 @@ let comedians = ["Jerry Seinfeld",
                 "Eddie Murphy"];
 let gifCount = 10;
 let limitRating = "PG";
-let person = $(".user-input").val()
 
 $(document).ready(function(){
 
-// Takes the array of comedians and creates buttons for each person when the page loads.
+// FUNCTIONS
+// This function takes the array of comedians and creates individual buttons for each person using the for loop.
 function arrayButtons() {
     for(let i = 0; i < comedians.length; i++) {
         let comedianButton = $("<button>");
@@ -35,19 +35,20 @@ function arrayButtons() {
     };
     // This click function will display the gifs from the GIPHY API when the comedianButton is clicked.
     $(".comedianButton").on("click", function() {
-        $(".gifs").empty();
+        $(".gifs-holder").empty();
         searchGiphy($(this).text());
     });
-}
-
+};
+// This function will search for the comedian entered by the user and then push the name to the comedians array if their button does not already exist.
 function buttonAddComedian(person) {
     if(comedians.indexOf(person) === -1) {
         comedians.push(person);
         $("#comedian-buttons").empty();
         arrayButtons();
-    }
-}
+    };
+};
 
+// This function will use AJAX to fetch the API data from the GIPHY url below.
 function searchGiphy(person) {
     let url = "http://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=YfTTp6H2HDR02OTPxGMDAvq0j4waEWYa&rating=" + limitRating + "&limit=" + gifCount;
     $.ajax({
@@ -56,36 +57,43 @@ function searchGiphy(person) {
     }).then(function(response) {
         let results = response.data;
         results.forEach(function(element) {
+            // Need a new div tag to store the ratings.
             let addDiv = $("<div>");
             addDiv.append("<p>Rating: " + element.rating.toUpperCase() + "</p>");
+            addDiv.attr("align", "center");
             addDiv.addClass("gif-box");
+            // Need a new img tag to store the gifs.
             let newGiphy = $("<img src = '" + element.images.fixed_height_still.url + "'>");
             newGiphy.attr("data-state", "still");
-            newGiphy.attr("still-data", element.images.fixed_height_still.url);
+            newGiphy.attr("data-stil", element.images.fixed_height_still.url);
             newGiphy.attr("data-animated", element.images.fixed_height.url);
             newGiphy.addClass("giphy");
+            // Add the newGiphy variable to the addDiv variable
             addDiv.append(newGiphy);
-            $(".gifs").append(addDiv);
-        })
+            // Add the addDiv variable to the .gifs-holder id
+            $(".gifs-holder").append(addDiv);
+        });
         
+        // Click function for if/else conditional statement to define which gif is to play or pause
         $(".giphy").on("click", function() {
             let state = $(this).attr("data-state");
             if (state === "still") {
-                $(this).attr("data-state", "animated");
                 $(this).attr("src", $(this).attr("data-animated"));
+                $(this).attr("data-state", "animated");
             } else {
+                $(this).attr("src", $(this).attr("data-stil"));
                 $(this).attr("data-state", "still");
-                $(this).attr("src", $(this).attr("still-data"));
-            }
+            };
         });
     });
 }
-
+    // CALL FUNCTIONS
     arrayButtons();
     $("#add-comedian").on("click", function() {
         event.preventDefault();
-        buttonAddComedian($("#user-input").val().trim());
-        $("#user-input").val("");
+        let person = $("#user-input").val();
+            buttonAddComedian($("#user-input").val().trim());
+            $("#user-input").val("");
     });
 });
 
