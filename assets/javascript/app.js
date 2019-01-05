@@ -31,7 +31,7 @@ function arrayButtons() {
         comedians.sort();
         comedianButton.text(comedians[i]);
         comedianButton.addClass("comedianButton");
-        $("#comedian-buttons").append(comedianButton);      
+        $("#comedian-buttons").append(comedianButton);
     };
     // This click function will display the gifs from the GIPHY API when the comedianButton is clicked.
     $(".comedianButton").on("click", function() {
@@ -92,7 +92,7 @@ function searchGiphy(person) {
     $("#add-comedian").on("click", function() {
         event.preventDefault();
         let person = $("#user-input").val();
-            buttonAddComedian($("#user-input").val().trim());
+            buttonAddComedian($("#user-input").val().trim();
             $("#user-input").val("");
     });
 });
