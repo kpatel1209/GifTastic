@@ -39,7 +39,8 @@ function arrayButtons() {
         searchGiphy($(this).text());
     });
 };
-// This function will search for the comedian entered by the user and then push the name to the comedians array if their button does not already exist.
+// This function will search for the comedian name entered by the user and then push the name to the comedians array if their button does not already exist.
+// Currently not able to add names alphabetically to the array where the 1st letter in the first name is entered in lower case lettering.
 function buttonAddComedian(person) {
     if(comedians.indexOf(person) === -1) {
         comedians.push(person);
@@ -92,10 +93,7 @@ function searchGiphy(person) {
     $("#add-comedian").on("click", function() {
         event.preventDefault();
         let person = $("#user-input").val();
-            buttonAddComedian($("#user-input").val().trim();
+            buttonAddComedian($("#user-input").val().trim());
             $("#user-input").val("");
     });
 });
-
-
- 
