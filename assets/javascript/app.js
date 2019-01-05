@@ -51,9 +51,9 @@ function buttonAddComedian(person) {
 
 // This function will use AJAX to fetch the API data from the GIPHY url below.
 function searchGiphy(person) {
-    let url = "https://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=YfTTp6H2HDR02OTPxGMDAvq0j4waEWYa&rating=" + limitRating + "&limit=" + gifCount;
+    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=YfTTp6H2HDR02OTPxGMDAvq0j4waEWYa&rating=" + limitRating + "&limit=" + gifCount;
     $.ajax({
-        url: url,
+        url: queryURL,
         method: "GET",
     }).then(function(response) {
         let results = response.data;
