@@ -87,13 +87,13 @@ function searchGiphy(person) {
             };
         });
     });
-}
+};
     // CALL FUNCTIONS
     arrayButtons();
     $("#add-comedian").on("click", function() {
         event.preventDefault();
-        let person = $("#user-input").val();
-            buttonAddComedian($("#user-input").val().trim());
+        let userChoice = $("#user-input").val().trim();
+            buttonAddComedian(userChoice);
             $("#user-input").val("");
     });
 });

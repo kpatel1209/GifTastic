@@ -16,6 +16,12 @@ h1 {
     letter-spacing: 5px;
 }
 
+a, 
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
 .buttons {
     justify-content: center;
 }
@@ -46,7 +52,8 @@ label {
     padding: 0 0 15px 0;
 }
 
-.btn-primary, #add-comedian {
+.btn-primary,
+#add-comedian {
     font-family: 'Bree Serif', serif;
     font-weight: normal;
 }
@@ -62,7 +69,7 @@ label {
 
 .gif-box {
     float: left;
-    margin: 10px 10px 10px 20px;
+    margin: 10px 10px 10px 10px;
     font-family: 'Bree Serif', serif;
     font-size: 18px;
     margin-bottom: 10px;
